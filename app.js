@@ -41,31 +41,41 @@ function initApp() {
         res.render('index', { title : 'Home' });
     });
 
+    app.get('/documents', function(req, res) {
+        db.collection('fileMetaCollection').find({ latestVersion: true }).toArray(function(err, documents) {
+            res.send(documents);
+        });
+    });
+
     app.post('/upload', function(req, res) {
         var tempfile    = req.files.file.path;
         var origname    = req.files.file.name;
-        var writestream = gfs.createWriteStream({ filename: origname });
 
-        // open a stream to the temporary file created by Express...
-        var readStream = fs.createReadStream(tempfile)
-            .on('end', function() { res.send('OK'); })
-            .on('error', function() { res.send('ERR'); })
-            // and pipe it to gfs
-            .pipe(writestream);
-
-        // This handler deletes the file once handled (success or error) so the file is either in MongoDB or not, but
-        // is not stored permanently on the local filesystem
-        readStream.on('close', function() { fs.unlink(tempfile); });
-
-        // Also create a standard mongo record with some meta information about this file
         db.collection('fileMetaCollection').find({ filename: origname }).sort({ _id: -1}).limit(1).nextObject(function (err, doc) {
             var version = doc ? doc.version + 1 : 1;
 
-            db.collection('fileMetaCollection').insert({
-                filename: origname,
-                author: 'Roger Foxcroft',
-                uploadTime: new Date().toISOString(),
-                version: version
+            var writestream = gfs.createWriteStream({ filename: origname, version: version });
+
+            // open a stream to the temporary file created by Express...
+            var readStream = fs.createReadStream(tempfile)
+                .on('end', function() { res.send('OK'); })
+                .on('error', function() { res.send('ERR'); })
+                // and pipe it to gfs
+                .pipe(writestream);
+
+            // This handler deletes the file once handled (success or error) so the file is either in MongoDB or not, but
+            // is not stored permanently on the local filesystem
+            readStream.on('close', function() { fs.unlink(tempfile); });
+
+            db.collection('fileMetaCollection').update({
+                filename: origname, latestVersion: true }, { $set:{latestVersion: false }}, { multi: true }, function () {
+                db.collection('fileMetaCollection').insert({
+                    filename: origname,
+                    author: 'Roger Foxcroft',
+                    uploadTime: new Date().toISOString(),
+                    latestVersion: true,
+                    version: version
+                });
             });
         });
 
@@ -74,3 +84,4 @@ function initApp() {
 
     app.listen(3000);
 }
+

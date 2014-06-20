@@ -23,18 +23,18 @@ text-color = #444
 message-banner-color = #add8e6
 
 body
-  font-family 'Georgia'
+  font-family 'Arial'
   background-color background-color
   color text-color
 
 header
   font-family 'Quicksand'
-  padding 50px 10px
+  padding 25px 10px
   color #fff
   font-size 25px
   text-align center
-  position absolute
   width 100%
+  position absolute
 
   /*
    * Note the use of the `main-color`
@@ -67,7 +67,7 @@ header
 .main-content
   height 100%
 
-  .watermark
+  #main-viewer
     display table
     text-align center
     color lighten(main-color, 50%)
@@ -75,9 +75,19 @@ header
     font-size 50px
     height 100%
     width 100%
+    z-buffer -10000
 
   p
     display table-cell
     vertical-align middle
     height 100%
     text-align center
+
+#filters
+  position absolute
+  height 400px
+  right 0
+  top 80px
+  padding 5px
+  background-color white
+

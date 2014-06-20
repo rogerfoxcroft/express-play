@@ -2,15 +2,24 @@ $(function() {
     $('.message-banner').hide();
     initDropzone();
     vex.defaultOptions.className = 'vex-theme-plain';
+
+    $('#clickme').toggle(function () {
+        alert('clicked');
+        $(this).parent().animate({left:'0px'}, {queue: false, duration: 500});
+    }, function () {
+        $(this).parent().animate({left:'-280px'}, {queue: false, duration: 500});
+    });
 });
 
 var lastTimeout;
 
 function showMessage(msg) {
+    // Clear the last timeout if a new message came in - timeout starts again
     if (lastTimeout != null) {
         clearTimeout(lastTimeout);
     }
 
+    // Clear the old message content and replace with the new, ensuring that the item is shown in case it has already faded
     $('.message-banner').finish().show();
     $('.message-banner p').text(msg);
 
@@ -31,10 +40,13 @@ function initDropzone() {
             this.on('addedfile', function() {
                 NProgress.start();
             });
-            this.on('success', function(file) {
+            this.on('success', function(file, res) {
                 NProgress.done();
                 showMessage('File "' + file.name + '" successfully uploaded');
                 this.removeFile(file);
+
+                // Rerender the view
+                refreshFileViewer();
             });
             this.on('error', function(file, error) {
                 NProgress.done();
