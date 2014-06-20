@@ -1,0 +1,22 @@
+doctype HTML5
+html
+  head
+    title #{title} - My Site
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/nprogress.css')
+    link(rel='stylesheet', href='/stylesheets/vex.css')
+    link(rel='stylesheet', href='/stylesheets/vex-theme-plain.css')
+
+    script(src='/js/jquery-2.1.1.min.js')
+    script(src='/js/dropzone.js')
+    script(src='/js/nprogress.js')
+    script(src='/js/vex.combined.min.js')
+    script(src='/js/common-init.js')
+  body
+    header
+      h1 Drag 'n' Drop Express Play with MongoDB GridFS storage
+    .message-banner
+      p #{lastMessage}
+    .container
+      .main-content
+        block content

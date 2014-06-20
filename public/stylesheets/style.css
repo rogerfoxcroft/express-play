@@ -1,0 +1,164 @@
+/*
+ * Import nib
+ */
+/*
+ * Grab a custom font from Google
+ */
+@import url("http://fonts.googleapis.com/css?family=Quicksand");
+/*
+ * Nib provides a CSS reset
+ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+/*
+ * Store the main color and
+ * background color as variables
+ */
+body {
+  font-family: 'Georgia';
+  background-color: #faf9f0;
+  color: #444;
+}
+header {
+  font-family: 'Quicksand';
+  padding: 50px 10px;
+  color: #fff;
+  font-size: 25px;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+/*
+   * Note the use of the `main-color`
+   * variable and the `darken` function
+   */
+  background-color: #fa5b4d;
+  border-bottom: 1px solid #df1806;
+  text-shadow: 0px -1px 0px #df1806;
+}
+.message-banner {
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  bottom: 0px;
+  background-color: #add8e6;
+  font-family: 'Quicksand';
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  border-top: thin solid #50acca;
+}
+.message-banner p .error {
+  color: #f00;
+}
+.container {
+  margin: 0 auto;
+  overflow: hidden;
+}
+.main-content {
+  height: 100%;
+}
+.main-content .watermark {
+  display: table;
+  text-align: center;
+  color: #fdada6;
+  font-family: 'Georgia';
+  font-size: 50px;
+  height: 100%;
+  width: 100%;
+}
+.main-content p {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+  text-align: center;
+}
