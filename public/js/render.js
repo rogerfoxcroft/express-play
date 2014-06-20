@@ -1,5 +1,6 @@
 function refreshFileViewer() {
-    $.get('/documents', null, renderNodes, 'json')
+    $('#main-viewer').empty();
+    $.get('/documents', null, renderNodes, 'json');
 }
 
 function renderNodes(arr) {
@@ -9,14 +10,7 @@ function renderNodes(arr) {
 }
 
 function renderNode(node) {
-    var canvas = document.getElementById('main-viewer');
-    var context = canvas.getContext("2d");
-    var centerX = canvas.width / 2;
-    var centerY = canvas.height / 2;
-    var radius = 5;
-
-    context.beginPath();
-    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = 'green';
-    context.fill();
+    $('#main-viewer').append(
+            '<div class="node"><div class="node-header">' + node.filename + '</div>' +
+                '<div class="node-body"><ul><li>Author: ' + node.author + '</li><li>Version: ' + node.version + '</ul></div></div>');
 }

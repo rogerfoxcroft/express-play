@@ -42,7 +42,7 @@ function initApp() {
     });
 
     app.get('/documents', function(req, res) {
-        db.collection('fileMetaCollection').find({ latestVersion: true }).toArray(function(err, documents) {
+        db.collection('fileMetaCollection').find({ latestVersion: true }).sort('filename').toArray(function(err, documents) {
             res.send(documents);
         });
     });
