@@ -80,8 +80,12 @@ header
     float left
     border solid thin main-color
     color main-color
+    background-color white
     margin 10px
     font-family Arial
+    box-shadow 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+    -moz-box-shadow 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+    -webkit-box-shadow 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
 
     .node-header
       font-size 0.3em
@@ -95,11 +99,23 @@ header
       padding 5px
       text-align left
 
-#filters
-  position absolute
-  height 400px
-  right 0
-  top 80px
-  padding 5px
-  background-color white
+  #filters
+    position absolute
+    height 400px
+    right 0
+    top 80px
+    background-color white
+
+    .filter-header
+      font-size 1em
+      background main-color
+      color background-color
+      padding 5px
+
+    .filter-body
+      font-size 0.8em
+      overflow hidden
+      padding 5px
+      text-align left
+
 
